@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>نظام النقاط</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+body {
+  font-family: Arial;
+  background: #f4f6f8;
+  text-align: center;
+  padding: 20px;
+}
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+button {
+  padding: 12px;
+  margin-top: 10px;
+  background: #0088cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+  <h2>💎 نظام النقاط</h2>
+  <p id="user"></p>
+  <p>⭐ نقاطك: <b id="points">0</b></p>
+  <p>🔗 رابط الإحالة:</p>
+  <input id="ref" style="width:90%" readonly>
+  <br>
+  <button onclick="copyRef()">نسخ الرابط</button>
+</div>
+
+<script>
+let tg = window.Telegram.WebApp;
+tg.ready();
+
+let user = tg.initDataUnsafe.user;
+let userId = user.id;
+
+document.getElementById("user").innerText =
+  "👤 " + user.first_name;
+
+let refLink = "https://t.me/@Fastganbot?start=" + userId;
+document.getElementById("ref").value = refLink;
+
+function copyRef() {
+  navigator.clipboard.writeText(refLink);
+  alert("✅ تم نسخ رابط الإحالة");
+}
+</script>
+</body>
+</html>

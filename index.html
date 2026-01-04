@@ -1,60 +1,27 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8">
-<title>نظام النقاط</title>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<style>
-body {
-  font-family: Arial;
-  background: #f4f6f8;
-  text-align: center;
-  padding: 20px;
-}
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-}
-button {
-  padding: 12px;
-  margin-top: 10px;
-  background: #0088cc;
-  color: white;
-  border: none;
-  border-radius: 8px;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>Mini App</title>
 </head>
-
 <body>
-<div class="card">
-  <h2>💎 نظام النقاط</h2>
-  <p id="user"></p>
-  <p>⭐ نقاطك: <b id="points">0</b></p>
-  <p>🔗 رابط الإحالة:</p>
-  <input id="ref" style="width:90%" readonly>
-  <br>
-  <button onclick="copyRef()">نسخ الرابط</button>
-</div>
+  <h2>جاري التحميل...</h2>
 
-<script>
-let tg = window.Telegram.WebApp;
-tg.ready();
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
 
-let user = tg.initDataUnsafe.user;
-let userId = user.id;
-
-document.getElementById("user").innerText =
-  "👤 " + user.first_name;
-
-let refLink = "https://t.me/@Fastganbot?start=" + userId;
-document.getElementById("ref").value = refLink;
-
-function copyRef() {
-  navigator.clipboard.writeText(refLink);
-  alert("✅ تم نسخ رابط الإحالة");
-}
-</script>
+    fetch("https://اسم-الخدمة.onrender.com/me?token=" + token)
+      .then(res => res.json())
+      .then(user => {
+        document.body.innerHTML = `
+          <h2>مرحبًا ${user.name}</h2>
+          <p>⭐ نقاطك: ${user.points}</p>
+        `;
+      })
+      .catch(() => {
+        document.body.innerHTML = "❌ خطأ في التحقق";
+      });
+  </script>
 </body>
 </html>

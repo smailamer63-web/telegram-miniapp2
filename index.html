@@ -11,7 +11,7 @@
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
 
-    fetch("https://اسم-الخدمة.onrender.com/me?token=" + token)
+    fetch("https://telegram-bot-f2qm.onrender.com/me?token=" + token)
       .then(res => res.json())
       .then(user => {
         document.body.innerHTML = `

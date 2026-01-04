@@ -2,12 +2,19 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Mini App Test</title>
 </head>
 <body>
 
-<h1>🔥 Mini App يعمل</h1>
-<p>إذا رأيت هذا النص فـ HTML يعمل</p>
+<h3 id="status">جاري الفحص...</h3>
+
+<script>
+  if (window.Telegram && Telegram.WebApp) {
+    document.getElementById("status").innerText = "✅ Telegram WebApp متصل";
+    Telegram.WebApp.ready();
+  } else {
+    document.getElementById("status").innerText = "❌ ليس داخل Telegram";
+  }
+</script>
 
 </body>
 </html>

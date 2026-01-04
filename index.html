@@ -1,27 +1,9 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <title>Mini App</title>
-</head>
-<body>
-  <h2>جاري التحميل...</h2>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("token");
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
-
-    fetch("https://telegram-bot-f2qm.onrender.com/me?token=" + token)
-      .then(res => res.json())
-      .then(user => {
-        document.body.innerHTML = `
-          <h2>مرحبًا ${user.name}</h2>
-          <p>⭐ نقاطك: ${user.points}</p>
-        `;
-      })
-      .catch(() => {
-        document.body.innerHTML = "❌ خطأ في التحقق";
-      });
-  </script>
-</body>
-</html>
+  document.body.innerHTML = `
+    <h3>DEBUG</h3>
+    <p>Token: ${token}</p>
+  `;
+</script>

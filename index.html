@@ -3,31 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <title>Mini App</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      padding: 40px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: none;
+      background: #0088cc;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-<h2 id="app">جاري التحميل...</h2>
+  <h2>👋 مرحبا بك في Mini App</h2>
+  <p>هذا تطبيق داخل تلغرام</p>
 
-<script>
-Telegram.WebApp.ready();
+  <button onclick="sendData()">إرسال بيانات للبوت</button>
 
-const params = new URLSearchParams(window.location.search);
-const token = params.get("token");
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
 
-if (!token) {
-  document.getElementById("app").innerText = "❌ تم فتح التطبيق بطريقة غير صحيحة";
-} else {
-  fetch("https://telegram-bot-f2qm.onrender.com/me?token=" + token)
-    .then(r => r.json())
-    .then(u => {
-      document.getElementById("app").innerHTML =
-        `<h2>مرحبًا ${u.name}</h2><p>⭐ نقاطك: ${u.points}</p>`;
-    })
-    .catch(() => {
-      document.getElementById("app").innerText = "❌ خطأ في الاتصال";
-    });
-}
-</script>
+    function sendData() {
+      tg.sendData("hello_from_webapp");
+    }
+  </script>
 
 </body>
 </html>
